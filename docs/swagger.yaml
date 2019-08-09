@@ -1,0 +1,154 @@
+basePath: '{{.BasePath}}'
+definitions:
+  models.Music:
+    properties:
+      createAt:
+        example: 创建时间
+        type: string
+      id:
+        type: integer
+      name:
+        example: 歌曲名称
+        type: string
+      style:
+        example: 音乐风格
+        type: string
+      updateAt:
+        example: 更新时间
+        type: string
+      year:
+        example: 年份
+        type: string
+    type: object
+host: '{{.Host}}'
+info:
+  contact: {}
+  description: An example of gin
+  license:
+    name: MIT
+  title: Golang Gin API
+  version: "2.0"
+paths:
+  /api/v2/music/:
+    get:
+      consumes:
+      - application/json
+      description: 音乐列表
+      parameters:
+      - description: name
+        in: query
+        name: name
+        type: string
+      - description: pageNum
+        in: query
+        name: pageNum
+        required: true
+        type: string
+      - description: pageSize
+        in: query
+        name: pageSize
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Music'
+            type: object
+        "400":
+          description: '{ "code": 400, "message": "请求失败" }'
+          schema:
+            type: string
+        "500":
+          description: '{ "code": 500, "message": "服务器错误" }'
+          schema:
+            type: string
+      summary: 获取音乐列表
+      tags:
+      - 音乐
+    post:
+      consumes:
+      - application/json
+      description: 创建音乐
+      parameters:
+      - description: name
+        in: query
+        name: name
+        type: string
+      - description: year
+        in: query
+        name: year
+        type: string
+      - description: style
+        in: query
+        name: style
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Music'
+            type: object
+        "400":
+          description: '{ "code": 400, "message": "请求失败" }'
+          schema:
+            type: string
+      summary: 创建音乐列表
+      tags:
+      - 音乐
+  /api/v2/music/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: 音乐列表
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Music'
+            type: object
+        "400":
+          description: '{ "code": 400, "message": "id必传" }'
+          schema:
+            type: string
+      summary: 删除音乐列表
+      tags:
+      - 音乐
+    put:
+      consumes:
+      - application/json
+      description: 音乐列表
+      parameters:
+      - description: id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Music'
+            type: object
+        "400":
+          description: '{ "code": 400, "message": "id必传" }'
+          schema:
+            type: string
+      summary: 更新音乐列表
+      tags:
+      - 音乐
+swagger: "2.0"

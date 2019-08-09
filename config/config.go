@@ -21,16 +21,23 @@ func Config() *gorm.DB {
 		fmt.Println("数据库连接失败", err.Error())
 	} else {
 		fmt.Println("数据库已连接！")
-		// 关联数据表
-		db.AutoMigrate(&models.Music{})
+		// 关联数据表自动迁移
+		db.AutoMigrate(&models.Music{}, &models.Film{})
 
-		// 检查模型`Movie`的表是否存在
-		hasTable := db.HasTable(&models.Music{})
-		fmt.Println(hasTable, "--")
-		if !hasTable {
-			// 为模型`Product`创建表,CHARSET=utf8设置数据库的字符集为utf8
+		// 检查模型`Music`的表是否存在
+		hasTableMusic := db.HasTable(&models.Music{})
+		fmt.Println(hasTableMusic, "--")
+		if !hasTableMusic {
+			// 为模型`Music`创建表,CHARSET=utf8设置数据库的字符集为utf8
 			db.Set("gorm:table_options", "ENGINE=InnoDB CHARSET=utf8").CreateTable(&models.Music{})
 		}
+
+		// 检查模型`Film`的表是否存在
+		hasTableFilm := db.HasTable(&models.Film{})
+		if !hasTableFilm {
+			db.Set("gorm:table_options", "ENGINE=InnoDB CHARSET=utf8").CreateTable(&models.Film{})
+		}
+
 	}
 	return db
 }

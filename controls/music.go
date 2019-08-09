@@ -11,7 +11,18 @@ import (
 
 var db = config.Config()
 
-// 获取音乐列表
+// @Summary 获取音乐列表
+// @Description 音乐列表
+// @Tags 音乐
+// @Accept json
+// @Produce json
+// @Param name query string false "name"
+// @Param pageNum query string true "pageNum"
+// @Param pageSize query string true "pageSize"
+// @Success 200 {object} models.Music
+// @Failure 400 {string} json "{ "code": 400, "message": "请求失败" }"
+// @Failure 500 {string} json "{ "code": 500, "message": "服务器错误" }"
+// @Router /api/v2/music/ [get]
 func MusicList(c *gin.Context) {
 	var musics []models.Music
 
@@ -41,7 +52,17 @@ func MusicList(c *gin.Context) {
 	})
 }
 
-// 创建音乐列表
+// @Summary 创建音乐列表
+// @Description 创建音乐
+// @Tags 音乐
+// @Accept json
+// @Produce json
+// @Param name query string false "name"
+// @Param year query string false "year"
+// @Param style query string false "style"
+// @Success 200 {object} models.Music
+// @Failure 400 {string} json "{ "code": 400, "message": "请求失败" }"
+// @Router /api/v2/music/ [post]
 func MusicCreate(c *gin.Context) {
 	/*
 	 gin还提供了更加高级方法，c.Bind，
@@ -64,7 +85,15 @@ func MusicCreate(c *gin.Context) {
 	})
 }
 
-// 更新列表
+// @Summary 更新音乐列表
+// @Description 音乐列表
+// @Tags 音乐
+// @Accept json
+// @Produce json
+// @Param id path string true "id"
+// @Success 200 {object} models.Music
+// @Failure 400 {string} json "{ "code": 400, "message": "id必传" }"
+// @Router /api/v2/music/{id} [put]
 func MusicUpdate(c *gin.Context) {
 	id := com.StrTo(c.Param("id")).MustInt()
 	fmt.Println(id, "--")
@@ -86,7 +115,15 @@ func MusicUpdate(c *gin.Context) {
 	})
 }
 
-// 删除列表
+// @Summary 删除音乐列表
+// @Description 音乐列表
+// @Tags 音乐
+// @Accept json
+// @Produce json
+// @Param id path int true "id"
+// @Success 200 {object} models.Music
+// @Failure 400 {string} json "{ "code": 400, "message": "id必传" }"
+// @Router /api/v2/music/{id} [delete]
 func MusicDelete(c *gin.Context) {
 	id := com.StrTo(c.Param("id")).MustInt()
 	fmt.Println("id")
@@ -98,4 +135,3 @@ func MusicDelete(c *gin.Context) {
 		"data":    id,
 	})
 }
-
