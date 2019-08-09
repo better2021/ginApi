@@ -98,7 +98,7 @@ func MusicUpdate(c *gin.Context) {
 	id := com.StrTo(c.Param("id")).MustInt()
 	fmt.Println(id, "--")
 
-	music := &models.Music{ID: id} // 修改条件，根据ID修改
+	music := &models.BasicModel{ID: id} // 修改条件，根据ID修改
 	// 需要更新的元素
 	data := &models.Music{}
 	err := c.Bind(data)
