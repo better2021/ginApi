@@ -23,3 +23,14 @@ type Film struct {
 	Actor   string `json:"actor" example:"演员"`
 	Desc    string `json:"desc" example:"描述"`
 }
+
+// 注册信息
+type RegistInfo struct {
+	BasicModel
+	// 手机号
+	Phone string `json:"phone"  example:"手机号"`
+	// 用户名
+	Username string `json:"username" example:"用户名"`
+	// 密码
+	Pwd string `json:"pwd"  example:"密码"`
+}
