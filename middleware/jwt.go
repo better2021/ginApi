@@ -44,6 +44,7 @@ func JWTAuth() gin.HandlerFunc {
 		}
 		// 续集交由下一个路由处理，并将解析出的信息传递下去
 		c.Set("claims", claims)
+
 	}
 }
 
@@ -63,9 +64,9 @@ var (
 
 // 载荷，可以加一些自己需要的信息
 type CustomClaims struct {
-	ID    string `json:"id"`
-	Name  string `json:"name"`
-	Phone string `json:"phone"`
+	ID       string `json:"id"`
+	Username string `json:"username"`
+	Pwd      string `json:"pwd"`
 	jwt.StandardClaims
 }
 
@@ -89,8 +90,9 @@ func SetSignKey(key string) string {
 
 // Create 生成一个token
 func (j *JWT) CreateToken(claims CustomClaims) (string, error) {
-	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-	return token.SignedString(j.SigningKey)
+	tokenClaims := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+	token, err := tokenClaims.SignedString(j.SigningKey)
+	return token, err
 }
 
 // 解析Token

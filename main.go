@@ -42,7 +42,10 @@ func main() {
 
 		// 注册及登录
 		v2.POST("/register", controls.RegisterUser)
-		v2.POST("/login", controls.Login, middleware.JWTAuth())
+		v2.POST("/login", controls.Login)
+
+		v2.GET("/userList", controls.UserList, middleware.JWTAuth())
+		v2.DELETE("/userList/:id", controls.UserDelete, middleware.JWTAuth())
 	}
 
 	router.Run("localhost:8081")
