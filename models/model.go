@@ -24,6 +24,15 @@ type Film struct {
 	Desc    string `json:"desc" example:"描述"`
 }
 
+// 书籍
+type Book struct {
+	BasicModel
+	Name   string `json:"name" example:"书名"`
+	Year   int    `json:"year" example:"出版时间"`
+	Author string `json:"author" example:"作者"`
+	Desc   string `json:"desc" example:"描述"`
+}
+
 // 注册信息
 type RegistInfo struct {
 	BasicModel

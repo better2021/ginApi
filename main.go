@@ -40,6 +40,12 @@ func main() {
 		v2.PUT("/film/:id", controls.FilmUpdate)
 		v2.DELETE("/film/:id", controls.FilmDelete)
 
+		// 书籍列表
+		v2.GET("/book", controls.BookList)
+		v2.POST("/book", controls.BookCreate)
+		v2.PUT("/book/:id", controls.BookUpdate)
+		v2.DELETE("/book/:id", controls.BookDelete)
+
 		// 注册及登录
 		v2.POST("/register", controls.RegisterUser)
 		v2.POST("/login", controls.Login)

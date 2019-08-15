@@ -36,7 +36,16 @@ func generateToken(username string) (string, error) {
 	return token, err
 }
 
-// Register 注册用户
+// @Summary 注册用户
+// @Tags 用户
+// @Accept json
+// @Produce json
+// @Param username query string false "username"
+// @Param pwd query string false "pwd"
+// @Param phone query string false "phone"
+// @Success 200 {object} models.RegistInfo
+// @Failure 400 {string} json "{ "code": 400, "message": "请求失败" }"
+// @Router /api/v2/register/ [post]
 func RegisterUser(c *gin.Context) {
 	var registerInfo = &models.RegistInfo{}
 	_ = c.BindJSON(registerInfo)
@@ -58,7 +67,16 @@ func RegisterUser(c *gin.Context) {
 	}
 }
 
-// Login 登录
+// @Summary 用户登录
+// @Tags 用户
+// @Accept json
+// @Produce json
+// @Param username query string false "username"
+// @Param pwd query string false "pwd"
+// @Param phone query string false "phone"
+// @Success 200 {object} models.RegistInfo
+// @Failure 400 {string} json "{ "code": 400, "message": "请求失败" }"
+// @Router /api/v2/login/ [post]
 func Login(c *gin.Context) {
 	var registerInfo = &models.RegistInfo{}
 	username := c.PostForm("username") // 表单上传
@@ -98,7 +116,13 @@ func Login(c *gin.Context) {
 	}
 }
 
-// 用户列表
+// @Summary 用户列表
+// @Tags 用户
+// @Accept json
+// @Produce json
+// @Success 200 {object} models.RegistInfo
+// @Failure 400 {string} json "{ "code": 400, "message": "请求失败" }"
+// @Router /api/v2/userList/ [get]
 func UserList(c *gin.Context) {
 	var registerInfos []models.RegistInfo
 	db.Find(&registerInfos)
@@ -110,7 +134,13 @@ func UserList(c *gin.Context) {
 	})
 }
 
-// 删除用户
+// @Summary 删除用户
+// @Tags 用户
+// @Accept json
+// @Produce json
+// @Success 200 {object} models.RegistInfo
+// @Failure 400 {string} json "{ "code": 400, "message": "请求失败" }"
+// @Router /api/v2/userList/{id} [delete]
 func UserDelete(c *gin.Context) {
 	id, err := strconv.ParseInt(c.Param("id"), 10, 0)
 	if err != nil {

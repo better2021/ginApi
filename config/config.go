@@ -38,6 +38,12 @@ func Config() *gorm.DB {
 			db.Set("gorm:table_options", "ENGINE=InnoDB CHARSET=utf8").CreateTable(&models.Film{})
 		}
 
+		// 检查模型`BOOK`的表是否存在
+		hasTableBook := db.HasTable(&models.Book{})
+		if !hasTableBook {
+			db.Set("gorm:table_options", "ENGINE=InnoDB CHARSET=utf8").CreateTable(&models.Book{})
+		}
+
 		// 检查模型`RegistInfo`的表是否存在
 		hasTableUser := db.HasTable(&models.RegistInfo{})
 		if !hasTableUser {
