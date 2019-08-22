@@ -46,6 +46,9 @@ func main() {
 		v2.PUT("/book/:id", controls.BookUpdate)
 		v2.DELETE("/book/:id", controls.BookDelete)
 
+		// 文件上传
+		v2.POST("/upload", controls.UploadFile)
+
 		// 注册及登录
 		v2.POST("/register", controls.RegisterUser)
 		v2.POST("/login", controls.Login)

@@ -27,8 +27,8 @@ func MusicList(c *gin.Context) {
 	var musics []models.Music
 
 	name := c.Query("name")
-	pageNum := com.StrTo(c.Query("pageNum")).MustInt()
-	pageSize := com.StrTo(c.Query("pageSize")).MustInt()
+	pageNum := com.StrTo(c.DefaultQuery("pageNum", "1")).MustInt()    // 设置pageNum的默认参数 1
+	pageSize := com.StrTo(c.DefaultQuery("pageSize", "10")).MustInt() // 设置pageSize默认参数 2
 
 	fmt.Println(name, pageNum, pageSize, "-*-")
 	/*

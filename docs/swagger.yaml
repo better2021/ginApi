@@ -542,6 +542,31 @@ paths:
       summary: 注册用户
       tags:
       - 用户
+  /api/v2/upload/:
+    post:
+      consumes:
+      - multipart/form-data
+      description: 文件上传
+      parameters:
+      - description: file
+        in: query
+        name: file
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{ "code": 200, "message": "上传成功" }'
+          schema:
+            type: string
+        "400":
+          description: '{ "code": 400, "message": "请求失败" }'
+          schema:
+            type: string
+      summary: 文件上传
+      tags:
+      - 文件上传
   /api/v2/userList/:
     get:
       consumes:
