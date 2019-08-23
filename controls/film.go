@@ -37,8 +37,10 @@ func FilmList(c *gin.Context) {
 		"message": "请求成功",
 		"status":  http.StatusOK,
 		"data":    films,
-		"page":    pageNum,
-		"total":   count,
+		"attributes": gin.H{
+			"page":  pageNum,
+			"total": count,
+		},
 	})
 }
 

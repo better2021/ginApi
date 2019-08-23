@@ -47,8 +47,10 @@ func MusicList(c *gin.Context) {
 		"message": "请求成功",
 		"status":  http.StatusOK,
 		"data":    musics,
-		"page":    pageNum,
-		"total":   count,
+		"attributes": gin.H{
+			"page":  pageNum,
+			"total": count,
+		},
 	})
 }
 
