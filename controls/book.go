@@ -24,7 +24,7 @@ func BookList(c *gin.Context) {
 
 	name := c.Query("name")
 
-	pageNum, err := strconv.Atoi(c.Query("pageNum"))
+	pageNum, err := strconv.Atoi(c.DefaultQuery("pageNum", "1"))
 	if err != nil {
 		fmt.Println("请输入分页pageNum")
 		c.JSON(http.StatusOK, gin.H{
@@ -32,7 +32,7 @@ func BookList(c *gin.Context) {
 		})
 		return
 	}
-	pageSize, err := strconv.Atoi(c.Query("pageSize"))
+	pageSize, err := strconv.Atoi(c.DefaultQuery("pageSize", "10"))
 	if err != nil {
 		fmt.Println("请输入分页pageSize")
 		c.JSON(http.StatusOK, gin.H{

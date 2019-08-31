@@ -801,6 +801,9 @@
                 "updateAt": {
                     "type": "string",
                     "example": "更新时间"
+                },
+                "userId": {
+                    "type": "integer"
                 }
             }
         },

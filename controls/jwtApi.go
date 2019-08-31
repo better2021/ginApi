@@ -126,6 +126,9 @@ func Login(c *gin.Context) {
 func UserList(c *gin.Context) {
 	var registerInfos []models.RegistInfo
 	db.Find(&registerInfos)
+	// db.Model(&registerInfos).Related(&registerInfos.Books).Find(&registerInfos.Books)
+	// db.Model(&registerInfos).Association("Books").Find(&registerInfos.Books)
+
 	fmt.Println(registerInfos, "--")
 	c.JSON(http.StatusOK, gin.H{
 		"message": "请求成功",

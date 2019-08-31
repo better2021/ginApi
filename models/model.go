@@ -31,6 +31,7 @@ type Book struct {
 	Year   int    `json:"year" example:"出版时间"`
 	Author string `json:"author" example:"作者"`
 	Desc   string `json:"desc" example:"描述"`
+	UserId int    `json:"userId,omitempty"`
 }
 
 // 注册信息
@@ -40,6 +41,8 @@ type RegistInfo struct {
 	Phone string `json:"phone"  example:"手机号"`
 	// 用户名
 	Username string `json:"username" example:"用户名"`
+	// 用户的书籍
+	Books []Book `gorm:"ForeignKey:UserID;AssociationForeignKey:ID" json:"books" example:"书籍"`
 	// 密码
 	Pwd string `json:"pwd"  example:"密码"`
 }

@@ -19,6 +19,8 @@ definitions:
       updateAt:
         example: 更新时间
         type: string
+      userId:
+        type: integer
     type: object
   models.Film:
     properties:
