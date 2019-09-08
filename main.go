@@ -8,7 +8,9 @@ import (
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
 	"github.com/swaggo/gin-swagger"
+	"io"
 	"log"
+	"os"
 	"os/exec"
 )
 
@@ -18,6 +20,9 @@ import (
 // @termsOfService 运行地址：http://localhost:8081
 // @license.name MIT //localhost:8081
 func main() {
+	f, _ := os.Create("gin.log") // 创建gin.log日志文件
+	// gin.DefaultWriter = io.MultiReader(f)
+	gin.DefaultErrorWriter = io.MultiWriter(f) // 错误信息写入log日志文件
 	/*
 		cors.Default() 默认允许所有源跨域
 		跨域要写在路由前面，需要先执行
