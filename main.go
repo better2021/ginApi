@@ -10,6 +10,7 @@ import (
 	"github.com/swaggo/gin-swagger"
 	"io"
 	"log"
+	"net/http"
 	"os"
 	"os/exec"
 )
@@ -30,8 +31,13 @@ func main() {
 	router := gin.Default()
 	router.Use(cors.Default())
 
-	url := ginSwagger.URL("http://localhost:8081/swagger/doc.json") // The url pointing to API definition
+	url := ginSwagger.URL(":80/swagger/doc.json") // The url pointing to API definition
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, url))
+	router.GET("/api", func(c *gin.Context) { // 测试
+		c.JSON(http.StatusOK, gin.H{
+			"message": "hello go !",
+		})
+	})
 
 	v2 := router.Group("/api/v2")
 	{
@@ -64,7 +70,7 @@ func main() {
 		v2.DELETE("/userList/:id", controls.UserDelete, middleware.JWTAuth())
 	}
 
-	router.Run(":8081")
+	router.Run(":80")
 	reLaunch()
 }
 
