@@ -59,7 +59,7 @@ func main() {
 		v2.DELETE("/userList/:id", controls.UserDelete, middleware.JWTAuth())
 	}
 
-	router.Run("localhost:8081")
+	router.Run(":8081")
 	reLaunch()
 }
 
