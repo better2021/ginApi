@@ -8,6 +8,8 @@ import (
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
 	"github.com/swaggo/gin-swagger"
+	"log"
+	"os/exec"
 )
 
 // @title Golang Gin API
@@ -58,4 +60,15 @@ func main() {
 	}
 
 	router.Run("localhost:8081")
+	reLaunch()
+}
+
+// 自动部署
+func reLaunch() {
+	cmd := exec.Command("sh", "./deploy.sh")
+	err := cmd.Start()
+	if err != nil {
+		log.Fatal(err)
+	}
+	err = cmd.Wait()
 }
