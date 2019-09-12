@@ -100,7 +100,6 @@ func MusicUpdate(c *gin.Context) {
 	id := com.StrTo(c.Param("id")).MustInt()
 	fmt.Println(id, "--")
 
-	music := &models.BasicModel{ID: id} // 修改条件，根据ID修改
 	// 需要更新的元素
 	data := &models.Music{}
 	err := c.Bind(data)
@@ -108,8 +107,8 @@ func MusicUpdate(c *gin.Context) {
 		fmt.Println(err)
 		return
 	}
-
-	db.Model(music).Update(data)
+	// 根据id更新对应的数据
+	db.Model(data).Where("id=?", id).Update(data)
 	c.JSON(http.StatusOK, gin.H{
 		"message": "更新成功",
 		"status":  http.StatusOK,

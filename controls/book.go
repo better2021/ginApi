@@ -101,7 +101,6 @@ func BookUpdate(c *gin.Context) {
 	id, _ := strconv.Atoi(c.Param("id"))
 	fmt.Println(id, "--")
 
-	condition := &models.BasicModel{ID: id}
 	data := &models.Book{}
 	err := c.BindJSON(data)
 	if err != nil {
@@ -109,7 +108,7 @@ func BookUpdate(c *gin.Context) {
 		return
 	}
 
-	db.Model(condition).Update(data)
+	db.Model(data).Where("id=?", id).Update(data)
 	c.JSON(http.StatusOK, gin.H{
 		"message": "更新成功",
 		"status":  http.StatusOK,

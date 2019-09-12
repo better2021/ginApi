@@ -71,7 +71,7 @@ func main() {
 		v2.DELETE("/userList/:id", controls.UserDelete, middleware.JWTAuth())
 	}
 
-	router.Run(":80")
+	router.Run(":8081")
 	reLaunch()
 }
 

@@ -87,7 +87,6 @@ func FilmUpdate(c *gin.Context) {
 	id := com.StrTo(c.Param("id")).MustInt()
 	fmt.Println(id, "--")
 
-	condition := &models.BasicModel{ID: id}
 	data := &models.Film{}
 	err := c.Bind(data)
 	if err != nil {
@@ -95,7 +94,7 @@ func FilmUpdate(c *gin.Context) {
 		return
 	}
 
-	db.Model(condition).Update(data)
+	db.Model(data).Where("id=?", id).Update(data)
 	c.JSON(http.StatusOK, gin.H{
 		"message": "更新成功",
 		"status":  http.StatusOK,
