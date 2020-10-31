@@ -11,7 +11,7 @@ RUN go get
 RUN go build -o main .
 
 FROM scratch as final
-MAINTAINER feiyu <709463253@qq.com>
+MAINTAINER pipi <709463253@qq.com>
 WORKDIR /ginApi
 COPY --from=builder /go/src/github.com/feiyuWeb/ginApi/config /ginApi/config
 COPY --from=builder /go/src/github.com/feiyuWeb/ginApi/controls /ginApi/controls
