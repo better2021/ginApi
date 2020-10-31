@@ -67,8 +67,8 @@ func main() {
 		v2.POST("/register", controls.RegisterUser)
 		v2.POST("/login", controls.Login)
 
-		v2.GET("/userList", controls.UserList, middleware.JWTAuth())
-		v2.DELETE("/userList/:id", controls.UserDelete, middleware.JWTAuth())
+		v2.GET("/userList",middleware.JWTAuth(), controls.UserList)
+		v2.DELETE("/userList/:id", middleware.JWTAuth(), controls.UserDelete)
 	}
 
 	router.Run(":8081")
