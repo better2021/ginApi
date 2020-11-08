@@ -19,7 +19,7 @@ import (
 // @title Golang Gin API
 // @version 2.0
 // @description An example of gin
-// @termsOfService 运行地址：http://localhost:8081
+// @termsOfService 运行地址：http://localhost:8081/swagger/index.html
 // @license.name MIT //localhost:8081
 func main() {
 	f, _ := os.Create("gin.log") // 创建gin.log日志文件
@@ -32,7 +32,7 @@ func main() {
 	router := gin.Default()
 	router.Use(cors.Default())
 
-	url := ginSwagger.URL(":80/swagger/doc.json") // The url pointing to API definition
+	url := ginSwagger.URL(":8081/swagger/doc.json") // The url pointing to API definition
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, url))
 	// 测试api
 	router.GET("/api", func(c *gin.Context) {
@@ -68,8 +68,8 @@ func main() {
 		v2.POST("/register", controls.RegisterUser)
 		v2.POST("/login", controls.Login)
 
-		v2.GET("/userList", controls.UserList, middleware.JWTAuth())
-		v2.DELETE("/userList/:id", controls.UserDelete, middleware.JWTAuth())
+		v2.GET("/userList",middleware.JWTAuth(), controls.UserList)
+		v2.DELETE("/userList/:id", middleware.JWTAuth(), controls.UserDelete)
 	}
 
 	router.Run(":8081")
