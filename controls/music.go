@@ -25,6 +25,7 @@ var db = config.Config()
 // @Router /api/v2/music/ [get]
 func MusicList(c *gin.Context) {
 	var musics []models.Music
+	fmt.Println("ip", c.ClientIP()) // 客户ip
 
 	name := c.Query("name")
 	pageNum := com.StrTo(c.DefaultQuery("pageNum", "1")).MustInt()    // 设置pageNum的默认参数 1
@@ -47,6 +48,7 @@ func MusicList(c *gin.Context) {
 		"message": "请求成功",
 		"status":  http.StatusOK,
 		"data":    musics,
+		"ip":      c.ClientIP(),
 		"attributes": gin.H{
 			"page":  pageNum,
 			"total": count,
